@@ -5,12 +5,22 @@ selector: 'my-app',
 template: `
 <h2>FCamara Products</h2>
 <ul class="products">
-  <li *ngFor="let product of products" (click)="onSelect(product)">
+  <li *ngFor="let product of products" 
+    [class.selected]="product === selectedProduct"
+    (click)="onSelect(product)">
     <span class="badge">{{product.id}}</span> {{product.name}}
     <!-- each hero goes here -->
   </li>
-</ul>  
-`, 
+</ul>
+<div *ngIf="selectedProduct">
+  <h2>{{selectedProduct.name}} details!</h2>
+  <div><label>name: </label>{{selectedProduct.name}}</div>
+  <div>
+    <label>price: </label>
+    $ {{selectedProduct.price}}
+  </div>
+</div>
+`,
 styles: [`
 .selected {
 background-color: #CFD8DC !important;
@@ -65,11 +75,17 @@ border-radius: 4px 0 0 4px;
 export class AppComponent {
 title = 'FCamara products';
 products = PRODUCTS;
+selectedProduct: Product;
+
+onSelect(product: Product): void {
+this.selectedProduct = product;
+}
 }
 
 export class Product {
 id: number;
 name: string;
+price: string;
 }
 
 const PRODUCTS: Product[] = [
@@ -84,12 +100,4 @@ const PRODUCTS: Product[] = [
 { id: 19, name: 'Arroz' },
 { id: 20, name: 'Feijão' }
 ];
-
-
-
-
-
-
-
-
 
