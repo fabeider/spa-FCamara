@@ -77,7 +77,7 @@ export class AppComponent {
   constructor(private productService: ProductService){}
 
   getProducts(): void {
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().then(products => this.products = products);
   }
 
   ngOnInit(): void {
