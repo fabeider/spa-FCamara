@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from './product';
 
 @Component({
 selector: 'my-app',
@@ -12,14 +13,7 @@ template: `
     <!-- each hero goes here -->
   </li>
 </ul>
-<div *ngIf="selectedProduct">
-  <h2>{{selectedProduct.name}} details!</h2>
-  <div><label>name: </label>{{selectedProduct.name}}</div>
-  <div>
-    <label>price: </label>
-    $ {{selectedProduct.price}}
-  </div>
-</div>
+<my-product-detail [product]="selectedProduct"></my-product-detail>
 `,
 styles: [`
 .selected {
@@ -82,22 +76,16 @@ this.selectedProduct = product;
 }
 }
 
-export class Product {
-id: number;
-name: string;
-price: string;
-}
-
 const PRODUCTS: Product[] = [
-{ id: 11, name: 'Bola' },
-{ id: 12, name: 'Pasta de dente' },
-{ id: 13, name: 'Coca-cola' },
-{ id: 14, name: 'Café' },
-{ id: 15, name: 'Manteiga' },
-{ id: 16, name: 'Cerveja' },
-{ id: 17, name: 'Tomate' },
-{ id: 18, name: 'Celular' },
-{ id: 19, name: 'Arroz' },
-{ id: 20, name: 'Feijão' }
+{ id: 11, name: 'Bola', price: '0,00'},
+{ id: 12, name: 'Pasta de dente', price: '0,00' },
+{ id: 13, name: 'Coca-cola', price: '0,00' },
+{ id: 14, name: 'Café', price: '0,00' },
+{ id: 15, name: 'Manteiga', price: '0,00' },
+{ id: 16, name: 'Cerveja', price: '0,00' },
+{ id: 17, name: 'Tomate', price: '0,00' },
+{ id: 18, name: 'Celular', price: '0,00' },
+{ id: 19, name: 'Arroz', price: '0,00' },
+{ id: 20, name: 'Feijão', price: '0,00' }
 ];
 
