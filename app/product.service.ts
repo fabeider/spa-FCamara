@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Product } from './product';
+import { Product } from './_models/product';
 import { AuthenticationService } from './_services/authentication.service';
 
 
