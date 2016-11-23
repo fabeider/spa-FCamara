@@ -1,19 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/toPromise';
 
 import { Product } from './product';
+import { AuthenticationService } from './_services/authentication.service';
+
 
 @Injectable()
 export class ProductService {
-private productsUrl = 'http://127.0.0.1:8080/products';
+private productsUrl = 'http://127.0.0.1:8080/api/products';
 
-constructor(private http: Http) {}
+constructor(
+        private http: Http,
+        private authenticationService: AuthenticationService) {
+    }
 
 getProducts(): Observable<Product[]>{
-  return this.http.get(this.productsUrl)
+  console.log(this.authenticationService.token);
+  let headers = new Headers({ 'x-access-token': this.authenticationService.token });
+  let options = new RequestOptions({ headers: headers });
+
+  return this.http.get(this.productsUrl, options)
                     .map(this.extractData)
                     .catch(this.handleError);
                     }

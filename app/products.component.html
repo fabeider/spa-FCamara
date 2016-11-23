@@ -6,4 +6,5 @@
   </li>
 </ul>
 <p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+<p><a [routerLink]="['/login']">Logout</a></p>
 <my-product-detail [product]="selectedProduct"></my-product-detail>
