@@ -7,7 +7,7 @@ import { ProductDetailComponent } from './product-detail.component';
 import { AppComponent }   from './app.component';
 import { ProductsComponent } from './products.component';
 import { ProductService }         from './product.service';
-import { routing }        from './app.routing';
+import { AppRoutingModule }        from './app.routing';
 
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthenticationService } from './_services/authentication.service';
@@ -19,7 +19,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule, 
     HttpModule,
     FormsModule,
-    routing
+    AppRoutingModule
   ],
   declarations: [ 
     AppComponent, 
@@ -29,7 +29,8 @@ import { LoginComponent } from './login/login.component';
   providers: [
     AuthGuard,
     AuthenticationService,
-    ProductService
+    ProductService,
+    AppRoutingModule
   ],
   bootstrap:    [ AppComponent ]
 })

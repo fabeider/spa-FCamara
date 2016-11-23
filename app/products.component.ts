@@ -4,14 +4,14 @@ import { Product } from './product';
 import { ProductService } from './product.service';
 
 @Component({
-selector: 'my-products',
-templateUrl: './app/products.component.html',
-styleUrls: [ './app/products.component.css' ]
+  moduleId: module.id,
+  selector: 'my-products',
+  templateUrl: 'products.component.html',
+  styleUrls: [ 'products.component.css' ]
 })
 
-export class ProductsComponent {
+export class ProductsComponent implements OnInit{
   errorMessage: string;
-  title = 'FCamara products';
   products: Product[];
   selectedProduct: Product;
 
@@ -19,8 +19,8 @@ export class ProductsComponent {
 
   getProducts(): void {
     this.productService.getProducts().subscribe(
-                     products => this.products = products,
-                     error =>  this.errorMessage = <any>error);
+      products => this.products = products,
+      error =>  this.errorMessage = <any>error);
   }
 
   ngOnInit(): void {
