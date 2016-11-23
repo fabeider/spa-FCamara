@@ -1,0 +1,9 @@
+<ul class="products">
+  <li *ngFor="let product of products" 
+    [class.selected]="product === selectedProduct"
+    (click)="onSelect(product)">
+    <span class="badge">{{product.id}}</span> {{product.name}}
+  </li>
+</ul>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
+<my-product-detail [product]="selectedProduct"></my-product-detail>

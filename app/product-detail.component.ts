@@ -4,12 +4,12 @@ import { Product } from './product';
 @Component({
   selector: 'my-product-detail',
   template: `
-  <div *ngIf="selectedProduct">
-    <h2>{{selectedProduct.name}} details!</h2>
-    <div><label>name: </label>{{selectedProduct.name}}</div>
+  <div *ngIf="product">
+    <h2>{{product.name}} details!</h2>
+    <div><label>name: </label>{{product.name}}</div>
     <div>
       <label>price: </label>
-      $ {{selectedProduct.price}}
+      $ {{product.price}}
     </div>
   </div>
 `
