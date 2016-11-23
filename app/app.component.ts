@@ -15,6 +15,7 @@ template: `
     <!-- each hero goes here -->
   </li>
 </ul>
+<p class="error" *ngIf="errorMessage">{{errorMessage}}</p>
 <my-product-detail [product]="selectedProduct"></my-product-detail>
 `,
 styles: [`
@@ -70,6 +71,7 @@ providers: [ProductService]
 })
 
 export class AppComponent {
+  errorMessage: string;
   title = 'FCamara products';
   products: Product[];
   selectedProduct: Product;
@@ -77,7 +79,9 @@ export class AppComponent {
   constructor(private productService: ProductService){}
 
   getProducts(): void {
-    this.productService.getProducts().then(products => this.products = products);
+    this.productService.getProducts().subscribe(
+                     products => this.products = products,
+                     error =>  this.errorMessage = <any>error);
   }
 
   ngOnInit(): void {

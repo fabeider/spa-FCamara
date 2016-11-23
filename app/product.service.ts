@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -7,19 +8,34 @@ import { Product } from './product';
 
 @Injectable()
 export class ProductService {
-private productsUrl = 'app/products';
+private productsUrl = 'http://127.0.0.1:8080/products';
 
 constructor(private http: Http) {}
 
-getProducts(): Promise<Product[]>{
+getProducts(): Observable<Product[]>{
   return this.http.get(this.productsUrl)
-  .toPromise()
-  .then(response => response.json().data as Product[])
-  .catch(this.handleError);
+                    .map(this.extractData)
+                    .catch(this.handleError);
+                    }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    console.log(body);
+    return body || { };
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
+  private handleError (error: Response | any) {
+    console.log("handle error");
+    // In a real world app, we might use a remote logging infrastructure
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
     }
-    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
+ }
